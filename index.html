@@ -15,12 +15,19 @@
       background: #f8fafc;
       color: #0f172a;
       line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
     }
     header {
       background: linear-gradient(135deg, #0f172a, #1e293b);
       color: white;
       padding: 2rem 1.5rem;
+      border-radius: 1rem;
       text-align: center;
+      margin-bottom: 2rem;
     }
     header h1 {
       font-size: 2rem;
@@ -29,11 +36,6 @@
     header p {
       font-size: 1.125rem;
       opacity: 0.9;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
     }
     .cards {
       display: grid;
@@ -94,57 +96,67 @@
     .recent li:last-child {
       border: none;
     }
+    .recent a {
+      text-decoration: none;
+      color: #1e3a8a;
+      font-weight: 500;
+    }
+    .recent a:hover {
+      text-decoration: underline;
+    }
     footer {
       text-align: center;
       padding: 2rem;
       background: #e2e8f0;
+      border-radius: 1rem;
       margin-top: 2rem;
     }
     @media (max-width: 640px) {
       header h1 { font-size: 1.5rem; }
-      .container { padding: 0 1rem; }
+      .container { padding: 0; }
     }
   </style>
 </head>
 <body>
+<div class="container">
   <header>
     <h1>🎮 Roblox Guides</h1>
     <p>Tips, free codes, and tutorials to level up your game</p>
   </header>
 
-  <div class="container">
-    <div class="cards">
-      <div class="card">
-        <h3>✨ Latest Codes</h3>
-        <p>Updated daily – get free cosmetics, currency, and boosts.</p>
-        <a href="#" class="btn">View Codes →</a>
-      </div>
-      <div class="card">
-        <h3>📚 Game Tutorials</h3>
-        <p>Step‑by‑step guides for Adopt Me, Brookhaven, Pet Simulator and more.</p>
-        <a href="#" class="btn">Explore →</a>
-      </div>
-      <div class="card">
-        <h3>💎 Robux Tips</h3>
-        <p>Safe and legit ways to earn Robux (no scams).</p>
-        <a href="#" class="btn">Learn More →</a>
-      </div>
+  <div class="cards">
+    <div class="card">
+      <h3>✨ Latest Codes</h3>
+      <p>Updated daily – get free cosmetics, currency, and boosts.</p>
+      <a href="/roblox-codes-may2026.html" class="btn">View Codes →</a>
     </div>
+    <div class="card">
+      <h3>📚 Game Tutorials</h3>
+      <p>Step‑by‑step guides for Adopt Me, Brookhaven, Pet Simulator and more.</p>
+      <a href="/adopt-me-guide.html" class="btn">Explore →</a>
+    </div>
+    <div class="card">
+      <h3>💎 Robux Tips</h3>
+      <p>Safe and legit ways to earn Robux (no scams).</p>
+      <a href="/free-robux-guide.html" class="btn">Learn More →</a>
+    </div>
+  </div>
 
-    <div class="recent">
-      <h2>🔥 Recent Guides</h2>
-      <ul>
-        <li>✨ <strong>Adopt Me</strong> – How to get legendary pets fast</li>
-        <li>🏡 <strong>Brookhaven RP</strong> – Secret house locations & money hacks</li>
-        <li>🐾 <strong>Pet Simulator 99</strong> – Best area to farm coins</li>
-        <li>🎁 <strong>Working promo codes</strong> – May 2026 update</li>
-        <li>💡 <strong>Roblox settings</strong> – Boost FPS and reduce lag</li>
-      </ul>
-    </div>
+  <div class="recent">
+    <h2>🔥 Recent Guides</h2>
+    <ul>
+      <li><a href="/adopt-me-guide.html">✨ Adopt Me Ultimate Guide – How to get legendary pets fast</a></li>
+      <li><a href="/brookhaven-guide.html">🏡 Brookhaven RP – Secret money locations & hidden cash stashes</a></li>
+      <li><a href="/petsim99-guide.html">🐾 Pet Simulator 99 – Best pets, fast coins & hidden areas</a></li>
+      <li><a href="/bloxfruits-guide.html">🍎 Blox Fruits – Fruit tier list & fast leveling guide</a></li>
+      <li><a href="/roblox-codes-may2026.html">🎁 Working promo codes – May 2026 update</a></li>
+      <li><a href="/free-robux-guide.html">💰 Free Robux – Real methods (no scams)</a></li>
+    </ul>
   </div>
 
   <footer>
     <p>© 2026 Roblox Guides. Not affiliated with Roblox Corporation.</p>
   </footer>
+</div>
 </body>
 </html>
