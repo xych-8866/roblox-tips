@@ -55,7 +55,7 @@
 </div>
 
 <script>
-  // 游戏数据：每个游戏有名称和对应的链接数组及标题
+  // 游戏数据
   const gamesData = [
     { name: "Adopt Me", links: ["/adopt-me-guide.html"], linkTitles: ["Ultimate Guide"] },
     { name: "Anime Fighters Simulator", links: ["/animefighters-guide.html"], linkTitles: ["Best Units & Fast Leveling"] },
@@ -109,7 +109,6 @@
     return '#';
   }
 
-  // 分组
   const groups = {};
   gamesData.forEach(game => {
     const letter = getFirstLetter(game.name);
@@ -121,7 +120,6 @@
   const alphabetRow = document.getElementById('alphabet-row');
   const containerDiv = document.getElementById('game-list-container');
 
-  // 渲染某个字母下的内容
   function renderGameList(letter) {
     const items = groups[letter] || [];
     if (items.length === 0) {
@@ -131,13 +129,10 @@
     let html = '';
     items.forEach(item => {
       if (item.url) {
-        // 特殊条目：直接显示链接
         html += `<div class="special-item"><a href="${item.url}">🎮 ${item.name}</a></div>`;
       } else {
-        // 游戏：显示一个按钮（游戏名），点击后显示其下的链接
-        const linksHtml = item.links.map((link, idx) => `<a href="${link}">📄 ${item.linkTitles[idx]}</a>`).join('');
-        // 生成唯一的ID用于展开/折叠
         const randomId = 'game-' + Math.random().toString(36).substring(2, 8);
+        const linksHtml = item.links.map((link, idx) => `<a href="${link}">📄 ${item.linkTitles[idx]}</a>`).join('');
         html += `
           <div class="game-item" id="${randomId}-container">
             <button class="game-name-btn" data-target="${randomId}">🎮 ${item.name}</button>
@@ -147,8 +142,6 @@
       }
     });
     containerDiv.innerHTML = html;
-
-    // 绑定点击事件：点击按钮切换对应链接区的显示
     document.querySelectorAll('.game-name-btn').forEach(btn => {
       btn.addEventListener('click', function(e) {
         const targetId = this.getAttribute('data-target');
@@ -164,7 +157,6 @@
     });
   }
 
-  // 生成字母按钮
   const letters = [];
   for (let i = 65; i <= 90; i++) letters.push(String.fromCharCode(i));
   letters.push('#');
@@ -181,7 +173,6 @@
     alphabetRow.appendChild(btn);
   });
 
-  // 默认显示第一个有内容的字母
   let firstNonEmpty = letters.find(l => groups[l] && groups[l].length > 0) || 'A';
   const defaultBtn = Array.from(alphabetRow.children).find(btn => btn.textContent === firstNonEmpty);
   if (defaultBtn) {
@@ -191,9 +182,53 @@
     renderGameList('A');
   }
 
-  // Recent Guides 列表保持不变
-  const recentItems = [ /* 此处省略，内容同上，但为了完整保留，复制原列表 */ ];
-  // 由于代码长度限制，这里省略 recentItems 的赋值，实际使用时需要补全。我会在最终答案中补全。
+  // Recent Guides 完整列表
+  const recentItems = [
+    "<li><a href=\"/pressure-guide.html\">🌊 Pressure – Survive monsters & escape the deep sea</a></li>",
+    "<li><a href=\"/dress-to-impress-guide.html\">👗 Dress to Impress – Best outfits & voting tips guide</a></li>",
+    "<li><a href=\"/strongest-battlegrounds-guide.html\">⚔️ The Strongest Battlegrounds – Combos & PvP tier list</a></li>",
+    "<li><a href=\"/untitled-boxing-game-guide.html\">🥊 Untitled Boxing Game – Best styles & ranked combos</a></li>",
+    "<li><a href=\"/adopt-me-guide.html\">✨ Adopt Me Ultimate Guide – How to get legendary pets fast</a></li>",
+    "<li><a href=\"/brookhaven-guide.html\">🏡 Brookhaven RP – Secret money locations & hidden cash stashes</a></li>",
+    "<li><a href=\"/petsim99-guide.html\">🐾 Pet Simulator 99 – Best pets, fast coins & hidden areas</a></li>",
+    "<li><a href=\"/bloxfruits-guide.html\">🍎 Blox Fruits – Fruit tier list & fast leveling guide</a></li>",
+    "<li><a href=\"/roblox-codes-may2026.html\">🎁 Working promo codes – May 2026 update</a></li>",
+    "<li><a href=\"/free-robux-guide.html\">💰 Free Robux – Real methods (no scams)</a></li>",
+    "<li><a href=\"/royalehigh-guide.html\">💎 Royale High – Best diamond farming methods</a></li>",
+    "<li><a href=\"/arsenal-guide.html\">🔫 Arsenal – Weapon tier list & pro strategies</a></li>",
+    "<li><a href=\"/doors-guide.html\">🚪 Doors – Complete survival guide (all monsters)</a></li>",
+    "<li><a href=\"/mm2-guide.html\">🔪 Murder Mystery 2 – Rare weapons value & trading tips</a></li>",
+    "<li><a href=\"/toh-guide.html\">⏱️ Tower of Hell – Speedrun shortcuts & pro strategies</a></li>",
+    "<li><a href=\"/meepcity-guide.html\">🏰 Meepcity – Fast money farming & hidden party house locations</a></li>",
+    "<li><a href=\"/piggy-guide.html\">🐷 Piggy – Complete survival guide & secret endings</a></li>",
+    "<li><a href=\"/rainbow-friends-guide.html\">🌈 Rainbow Friends – How to survive all monsters</a></li>",
+    "<li><a href=\"/pizzaplace-guide.html\">🍕 Work at a Pizza Place – Fast money & rank guide</a></li>",
+    "<li><a href=\"/vehiclesim-guide.html\">🏎️ Vehicle Simulator – Best cars & fast money guide</a></li>",
+    "<li><a href=\"/natural-disaster-guide.html\">🌪️ Natural Disaster Survival – How to survive every disaster</a></li>",
+    "<li><a href=\"/beeswarm-guide.html\">🐝 Bee Swarm Simulator – Best hive setup & honey guide</a></li>",
+    "<li><a href=\"/themepark-guide.html\">🎢 Theme Park Tycoon 2 – Best money & design guide</a></li>",
+    "<li><a href=\"/tds-guide.html\">⚔️ Tower Defense Simulator – Best towers & loadout guide</a></li>",
+    "<li><a href=\"/fisch-guide.html\">🎣 Fisch – Best rods & rare fish locations guide</a></li>",
+    "<li><a href=\"/shindo-guide.html\">⚔️ Shindo Life – Best bloodlines & spin guide</a></li>",
+    "<li><a href=\"/bladeball-guide.html\">⚔️ Blade Ball – Best abilities & deflection tricks</a></li>",
+    "<li><a href=\"/bedwars-guide.html\">🛏️ BedWars – Best kits & rush strategy</a></li>",
+    "<li><a href=\"/animefighters-guide.html\">⚔️ Anime Fighters Simulator – Best units & fast leveling</a></li>",
+    "<li><a href=\"/kinglegacy-guide.html\">👑 King Legacy – Best fruits & PvP guide</a></li>",
+    "<li><a href=\"/projectslayers-guide.html\">⚡ Project Slayers – Best breathing & clan guide</a></li>",
+    "<li><a href=\"/yba-guide.html\">⭐ YBA – Best stands & PvP guide</a></li>",
+    "<li><a href=\"/roblox-beginner-guide.html\">🎮 Roblox Beginner Guide – How to get started</a></li>",
+    "<li><a href=\"/grand-piece-guide.html\">🏴‍☠️ Grand Piece Online – Best fruits & PvP guide</a></li>",
+    "<li><a href=\"/jujutsu-kaiden-guide.html\">👁️ Jujutsu Kaiden – Best cursed techniques & domain expansion</a></li>",
+    "<li><a href=\"/karate-kick-guide.html\">🥋 Karate Kick – Best belts & fighting guide</a></li>",
+    "<li><a href=\"/ragdoll-engine-guide.html\">💥 Ragdoll Engine – Best moves & ragdoll combos</a></li>",
+    "<li><a href=\"/speedrun-simulator-guide.html\">🏃‍♂️ Speed Run Simulator – Best pets & speed upgrades</a></li>",
+    "<li><a href=\"/noob-army-tycoon-guide.html\">🪖 Noob Army Tycoon – Best units & fast money guide</a></li>",
+    "<li><a href=\"/bubble-gum-simulator-guide.html\">🫧 Bubble Gum Simulator – Best pets & coin farming</a></li>",
+    "<li><a href=\"/themepark-advanced-guide.html\">🎢 Theme Park Tycoon 2 – Advanced profit & design</a></li>",
+    "<li><a href=\"/evade-guide.html\">🏃‍♂️ Evade – Best abilities & survival guide</a></li>",
+    "<li><a href=\"/super-power-simulator-guide.html\">⚡ Super Power Training Simulator – Best powers & leveling</a></li>"
+  ];
+  document.getElementById('guide-list').innerHTML = recentItems.join('');
 </script>
 <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/63aeae9be041f090f109808ea6b1e0dd/script.js"></script>
 </body>
