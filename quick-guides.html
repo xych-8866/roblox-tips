@@ -8,24 +8,22 @@
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:transparent;color:#0f172a;line-height:1.5}
     .quick-nav{background:#fff;border-radius:1rem;padding:1.5rem;box-shadow:0 4px 6px -2px rgba(0,0,0,.05)}
-    .quick-nav h2{font-size:1.5rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+    .quick-nav h2{font-size:1.5rem;margin-bottom:1rem}
     .alphabet-row{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;margin-bottom:1.5rem}
     .alphabet-btn{background:#e2e8f0;color:#1e3a8a;font-weight:bold;font-size:1.2rem;padding:0.4rem 0.8rem;border-radius:2rem;cursor:pointer;transition:all 0.2s;text-align:center;min-width:3rem}
     .alphabet-btn:hover{background:#3b82f6;color:#fff}
-    .alphabet-btn.active{background:#3b82f6;color:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.1)}
+    .alphabet-btn.active{background:#3b82f6;color:#fff}
     .game-list-container{background:#f8fafc;border-radius:1rem;padding:1rem;min-height:120px}
     .game-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.5rem}
     .game-item{background:#fff;border-radius:0.5rem;padding:0.4rem 0.6rem;border-left:3px solid #3b82f6}
     .game-item a{text-decoration:none;color:#2563eb;font-weight:500;display:block}
     .game-item a:hover{text-decoration:underline}
-    .sub-links{margin-top:0.2rem;margin-left:0.5rem}
-    .sub-links a{font-size:0.85rem;color:#475569;font-weight:normal;display:inline-block;margin-right:0.5rem}
     .no-games{text-align:center;color:#475569;padding:1rem}
   </style>
 </head>
 <body>
 <div class="quick-nav">
-  <h2>🎮 Quick Game Guides <span style="font-size:0.9rem;">(按字母查找)</span></h2>
+  <h2>🎮 Quick Game Guides (按字母查找)</h2>
   <div class="alphabet-row" id="alphabet-row"></div>
   <div class="game-list-container" id="game-list-container">
     <div class="no-games">点击上方字母查看游戏攻略</div>
@@ -33,91 +31,81 @@
 </div>
 
 <script>
-  // 游戏数据（包含所有攻略，直接跳转链接）
-  const gamesRaw = [
-    { name: "Adopt Me", links: [{ title: "Ultimate Guide – Legendary Pets Fast", url: "/adopt-me-guide.html" }] },
-    { name: "Anime Fighters Simulator", links: [{ title: "Best Units & Fast Leveling", url: "/animefighters-guide.html" }] },
-    { name: "Arsenal", links: [{ title: "Weapon Tier List & Pro Strategies", url: "/arsenal-guide.html" }] },
-    { name: "BedWars", links: [{ title: "Best Kits & Rush Strategy", url: "/bedwars-guide.html" }] },
-    { name: "Bee Swarm Simulator", links: [{ title: "Best Hive Setup & Honey Farming", url: "/beeswarm-guide.html" }] },
-    { name: "Blade Ball", links: [{ title: "Best Abilities & Deflection Tricks", url: "/bladeball-guide.html" }] },
-    { name: "Blox Fruits", links: [{ title: "Fruit Tier List & Fast Leveling", url: "/bloxfruits-guide.html" }] },
-    { name: "Brookhaven RP", links: [{ title: "Secret Money Locations & Daily Cash", url: "/brookhaven-guide.html" }] },
-    { name: "Bubble Gum Simulator", links: [{ title: "Best Pets & Coin Farming", url: "/bubble-gum-simulator-guide.html" }] },
-    { name: "Doors", links: [{ title: "Complete Survival Guide", url: "/doors-guide.html" }] },
-    { name: "Dress to Impress", links: [{ title: "Best Outfits & Voting Tips", url: "/dress-to-impress-guide.html" }] },
-    { name: "Evade", links: [{ title: "Best Abilities & Survival Guide", url: "/evade-guide.html" }] },
-    { name: "Fisch", links: [{ title: "Best Rods & Rare Fish Locations", url: "/fisch-guide.html" }] },
-    { name: "Grand Piece Online", links: [{ title: "Best Fruits & PvP Guide", url: "/grand-piece-guide.html" }] },
-    { name: "Jujutsu Kaiden", links: [{ title: "Best Cursed Techniques & Domain Expansion", url: "/jujutsu-kaiden-guide.html" }] },
-    { name: "Karate Kick", links: [{ title: "Best Belts & Fighting Guide", url: "/karate-kick-guide.html" }] },
-    { name: "King Legacy", links: [{ title: "Best Fruits & PvP Guide", url: "/kinglegacy-guide.html" }] },
-    { name: "Meepcity", links: [{ title: "Fast Money Farming & Hidden Party House", url: "/meepcity-guide.html" }] },
-    { name: "Murder Mystery 2", links: [{ title: "Rare Weapons Value & Trading Tips", url: "/mm2-guide.html" }] },
-    { name: "Natural Disaster Survival", links: [{ title: "How to Survive Every Disaster", url: "/natural-disaster-guide.html" }] },
-    { name: "Noob Army Tycoon", links: [{ title: "Best Units & Fast Money", url: "/noob-army-tycoon-guide.html" }] },
-    { name: "Pet Simulator 99", links: [{ title: "Best Pets, Fast Coins & Hidden Areas", url: "/petsim99-guide.html" }] },
-    { name: "Piggy", links: [{ title: "Complete Survival Guide & Secret Endings", url: "/piggy-guide.html" }] },
-    { name: "Pressure", links: [{ title: "Survive Monsters & Escape the Deep Sea", url: "/pressure-guide.html" }] },
-    { name: "Project Slayers", links: [{ title: "Best Breathing & Clan Guide", url: "/projectslayers-guide.html" }] },
-    { name: "Ragdoll Engine", links: [{ title: "Best Moves & Ragdoll Combos", url: "/ragdoll-engine-guide.html" }] },
-    { name: "Rainbow Friends", links: [{ title: "How to Survive All Monsters", url: "/rainbow-friends-guide.html" }] },
-    { name: "Royale High", links: [{ title: "Best Diamond Farming Methods", url: "/royalehigh-guide.html" }] },
-    { name: "Shindo Life", links: [{ title: "Best Bloodlines & Spin Guide", url: "/shindo-guide.html" }] },
-    { name: "Speed Run Simulator", links: [{ title: "Best Pets & Speed Upgrades", url: "/speedrun-simulator-guide.html" }] },
-    { name: "Super Power Training Simulator", links: [{ title: "Best Powers & Leveling", url: "/super-power-simulator-guide.html" }] },
-    { name: "The Strongest Battlegrounds", links: [{ title: "Combos & PvP Tier List", url: "/strongest-battlegrounds-guide.html" }] },
-    { name: "Theme Park Tycoon 2", links: [
-        { title: "Best Money & Design Guide", url: "/themepark-guide.html" },
-        { title: "Advanced Profit & Design", url: "/themepark-advanced-guide.html" }
-      ] },
-    { name: "Tower Defense Simulator", links: [{ title: "Best Towers & Loadout Guide", url: "/tds-guide.html" }] },
-    { name: "Tower of Hell", links: [{ title: "Speedrun Shortcuts & Pro Strategies", url: "/toh-guide.html" }] },
-    { name: "Untitled Boxing Game", links: [{ title: "Best Styles & Ranked Combos", url: "/untitled-boxing-game-guide.html" }] },
-    { name: "Vehicle Simulator", links: [{ title: "Best Cars & Fast Money Guide", url: "/vehiclesim-guide.html" }] },
-    { name: "Work at a Pizza Place", links: [{ title: "Fast Money & Rank Guide", url: "/pizzaplace-guide.html" }] },
-    { name: "YBA (Your Bizarre Adventure)", links: [{ title: "Best Stands & PvP Guide", url: "/yba-guide.html" }] }
+  // 每个条目是一个直接链接
+  // 对于有多篇攻略的游戏，拆成多个独立条目，名称区分
+  const items = [
+    { name: "Adopt Me", url: "/adopt-me-guide.html", letter: "A" },
+    { name: "Anime Fighters Simulator", url: "/animefighters-guide.html", letter: "A" },
+    { name: "Arsenal", url: "/arsenal-guide.html", letter: "A" },
+    { name: "BedWars", url: "/bedwars-guide.html", letter: "B" },
+    { name: "Bee Swarm Simulator", url: "/beeswarm-guide.html", letter: "B" },
+    { name: "Blade Ball", url: "/bladeball-guide.html", letter: "B" },
+    { name: "Blox Fruits", url: "/bloxfruits-guide.html", letter: "B" },
+    { name: "Brookhaven RP", url: "/brookhaven-guide.html", letter: "B" },
+    { name: "Bubble Gum Simulator", url: "/bubble-gum-simulator-guide.html", letter: "B" },
+    { name: "Doors", url: "/doors-guide.html", letter: "D" },
+    { name: "Dress to Impress", url: "/dress-to-impress-guide.html", letter: "D" },
+    { name: "Evade", url: "/evade-guide.html", letter: "E" },
+    { name: "Fisch", url: "/fisch-guide.html", letter: "F" },
+    { name: "Grand Piece Online", url: "/grand-piece-guide.html", letter: "G" },
+    { name: "Jujutsu Kaiden", url: "/jujutsu-kaiden-guide.html", letter: "J" },
+    { name: "Karate Kick", url: "/karate-kick-guide.html", letter: "K" },
+    { name: "King Legacy", url: "/kinglegacy-guide.html", letter: "K" },
+    { name: "Meepcity", url: "/meepcity-guide.html", letter: "M" },
+    { name: "Murder Mystery 2", url: "/mm2-guide.html", letter: "M" },
+    { name: "Natural Disaster Survival", url: "/natural-disaster-guide.html", letter: "N" },
+    { name: "Noob Army Tycoon", url: "/noob-army-tycoon-guide.html", letter: "N" },
+    { name: "Pet Simulator 99", url: "/petsim99-guide.html", letter: "P" },
+    { name: "Piggy", url: "/piggy-guide.html", letter: "P" },
+    { name: "Pressure", url: "/pressure-guide.html", letter: "P" },
+    { name: "Project Slayers", url: "/projectslayers-guide.html", letter: "P" },
+    { name: "Ragdoll Engine", url: "/ragdoll-engine-guide.html", letter: "R" },
+    { name: "Rainbow Friends", url: "/rainbow-friends-guide.html", letter: "R" },
+    { name: "Royale High", url: "/royalehigh-guide.html", letter: "R" },
+    { name: "Shindo Life", url: "/shindo-guide.html", letter: "S" },
+    { name: "Speed Run Simulator", url: "/speedrun-simulator-guide.html", letter: "S" },
+    { name: "Super Power Training Simulator", url: "/super-power-simulator-guide.html", letter: "S" },
+    { name: "The Strongest Battlegrounds", url: "/strongest-battlegrounds-guide.html", letter: "T" },
+    { name: "Theme Park Tycoon 2 (基础)", url: "/themepark-guide.html", letter: "T" },
+    { name: "Theme Park Tycoon 2 (进阶)", url: "/themepark-advanced-guide.html", letter: "T" },
+    { name: "Tower Defense Simulator", url: "/tds-guide.html", letter: "T" },
+    { name: "Tower of Hell", url: "/toh-guide.html", letter: "T" },
+    { name: "Untitled Boxing Game", url: "/untitled-boxing-game-guide.html", letter: "U" },
+    { name: "Vehicle Simulator", url: "/vehiclesim-guide.html", letter: "V" },
+    { name: "Work at a Pizza Place", url: "/pizzaplace-guide.html", letter: "W" },
+    { name: "YBA (Your Bizarre Adventure)", url: "/yba-guide.html", letter: "Y" },
+    // # 特殊条目
+    { name: "✨ Latest Codes", url: "/category-codes.html", letter: "#" },
+    { name: "💎 Robux Tips", url: "/category-robux-tips.html", letter: "#" }
   ];
 
-  function getFirstLetter(name) {
-    const char = name.charAt(0).toUpperCase();
-    if (char >= 'A' && char <= 'Z') return char;
-    return '#';
-  }
-
+  // 按字母分组
   const groups = {};
-  for (const game of gamesRaw) {
-    const letter = getFirstLetter(game.name);
+  items.forEach(item => {
+    const letter = item.letter;
     if (!groups[letter]) groups[letter] = [];
-    groups[letter].push(game);
-  }
+    groups[letter].push(item);
+  });
 
   const alphabetRow = document.getElementById('alphabet-row');
   const containerDiv = document.getElementById('game-list-container');
-  
+  let activeLetter = null;
+
   function renderGameList(letter) {
-    const games = groups[letter] || [];
-    if (games.length === 0) {
+    const list = groups[letter] || [];
+    if (list.length === 0) {
       containerDiv.innerHTML = '<div class="no-games">📭 暂无攻略，敬请期待</div>';
       return;
     }
     let html = '<div class="game-list">';
-    games.forEach(game => {
-      if (game.links.length === 1) {
-        html += `<div class="game-item"><a href="${game.links[0].url}">🎮 ${game.name}</a></div>`;
-      } else {
-        let subHtml = '';
-        game.links.forEach(link => {
-          subHtml += `<a href="${link.url}">📖 ${link.title}</a>`;
-        });
-        html += `<div class="game-item"><a href="${game.links[0].url}">🎮 ${game.name}</a><div class="sub-links">${subHtml}</div></div>`;
-      }
+    list.forEach(item => {
+      html += `<div class="game-item"><a href="${item.url}">🎮 ${item.name}</a></div>`;
     });
     html += '</div>';
     containerDiv.innerHTML = html;
   }
 
-  // 生成字母按钮（A-Z + #）
+  // 生成字母按钮 A-Z 和 #
   const letters = [];
   for (let i = 65; i <= 90; i++) letters.push(String.fromCharCode(i));
   letters.push('#');
@@ -134,7 +122,7 @@
     alphabetRow.appendChild(btn);
   });
 
-  // 默认显示第一个有内容的字母
+  // 默认选中并显示第一个有内容的字母（比如 A 或 #）
   const firstNonEmpty = letters.find(l => groups[l] && groups[l].length > 0) || 'A';
   const defaultBtn = Array.from(alphabetRow.children).find(btn => btn.textContent === firstNonEmpty);
   if (defaultBtn) {
@@ -144,7 +132,7 @@
     renderGameList('A');
   }
 
-  // 嵌入后自动调整父页面iframe高度（可选）
+  // 自动调整 iframe 高度
   if (window.parent !== window) {
     const sendHeight = () => {
       const height = document.body.scrollHeight;
