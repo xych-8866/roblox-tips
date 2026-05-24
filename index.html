@@ -55,7 +55,7 @@
 </div>
 
 <script>
-  // 游戏数据
+  // 游戏数据（已包含新游戏）
   const gamesData = [
     { name: "Adopt Me", links: ["/adopt-me-guide.html"], linkTitles: ["Ultimate Guide"] },
     { name: "Anime Fighters Simulator", links: ["/animefighters-guide.html"], linkTitles: ["Best Units & Fast Leveling"] },
@@ -95,7 +95,12 @@
     { name: "Untitled Boxing Game", links: ["/untitled-boxing-game-guide.html"], linkTitles: ["Best Styles & Ranked Combos"] },
     { name: "Vehicle Simulator", links: ["/vehiclesim-guide.html"], linkTitles: ["Best Cars & Fast Money Guide"] },
     { name: "Work at a Pizza Place", links: ["/pizzaplace-guide.html"], linkTitles: ["Fast Money & Rank Guide"] },
-    { name: "YBA (Your Bizarre Adventure)", links: ["/yba-guide.html"], linkTitles: ["Best Stands & PvP Guide"] }
+    { name: "YBA (Your Bizarre Adventure)", links: ["/yba-guide.html"], linkTitles: ["Best Stands & PvP Guide"] },
+    // 新增游戏
+    { name: "Rivals", links: ["/rivals-guide.html"], linkTitles: ["Best Characters & Ranked PvP"] },
+    { name: "Blade League", links: ["/blade-league-guide.html"], linkTitles: ["Best Swords & Combos"] },
+    { name: "Car Dealership Tycoon", links: ["/car-dealership-tycoon-guide.html"], linkTitles: ["Fast Money & Best Cars"] },
+    { name: "Restaurant Tycoon 2", links: ["/restaurant-tycoon-2-guide.html"], linkTitles: ["Best Layout & Profit Guide"] }
   ];
 
   const specials = [
@@ -182,7 +187,7 @@
     renderGameList('A');
   }
 
-  // Recent Guides 完整列表
+  // Recent Guides 完整列表（已修复语法，添加新游戏）
   const recentItems = [
     "<li><a href=\"/pressure-guide.html\">🌊 Pressure – Survive monsters & escape the deep sea</a></li>",
     "<li><a href=\"/dress-to-impress-guide.html\">👗 Dress to Impress – Best outfits & voting tips guide</a></li>",
@@ -226,7 +231,7 @@
     "<li><a href=\"/bubble-gum-simulator-guide.html\">🫧 Bubble Gum Simulator – Best pets & coin farming</a></li>",
     "<li><a href=\"/themepark-advanced-guide.html\">🎢 Theme Park Tycoon 2 – Advanced profit & design</a></li>",
     "<li><a href=\"/evade-guide.html\">🏃‍♂️ Evade – Best abilities & survival guide</a></li>",
-    "<li><a href=\"/super-power-simulator-guide.html\">⚡ Super Power Training Simulator – Best powers & leveling</a></li>"
+    "<li><a href=\"/super-power-simulator-guide.html\">⚡ Super Power Training Simulator – Best powers & leveling</a></li>",
     "<li><a href=\"/rivals-guide.html\">⚔️ Rivals – Best characters & ranked PvP guide</a></li>",
     "<li><a href=\"/blade-league-guide.html\">🗡️ Blade League – Best swords & combos</a></li>",
     "<li><a href=\"/car-dealership-tycoon-guide.html\">🚗 Car Dealership Tycoon – Fast money & best cars</a></li>",
