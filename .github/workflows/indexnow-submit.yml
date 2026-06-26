@@ -1,0 +1,22 @@
+name: "IndexNow Auto Submit"
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 */3 * *'
+
+jobs:
+  submit-to-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Submit sitemap to IndexNow
+        uses: bojieyang/indexnow-action@v2
+        with:
+          sitemap-location: "https://www.robloxhelp.xyz/sitemap.xml"
+          endpoint: "www.bing.com"
+          key: "ef42ec79fdc849d8adb85bc42c52bf3c"
+          key-location: "https://www.robloxhelp.xyz/ef42ec79fdc849d8adb85bc42c52bf3c.txt"
