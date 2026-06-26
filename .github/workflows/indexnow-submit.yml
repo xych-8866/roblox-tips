@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '0 2 */3 * *'
+    - cron: '0 3 * * *'   # 每天凌晨 3:00 运行（可自定义修改）
 
 jobs:
   submit-to-indexnow:
