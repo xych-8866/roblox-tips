@@ -1,3 +1,18 @@
 User-agent: *
 Allow: /
+Disallow: /category-*.html
+Disallow: /*?*
+Disallow: /about.html
+Disallow: /contact.html
+Disallow: /privacy-policy.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /category-*.html
+Disallow: /*?*
+Disallow: /about.html
+Disallow: /contact.html
+Disallow: /privacy-policy.html
+Crawl-delay: 5
+
 Sitemap: https://www.robloxhelp.xyz/sitemap.xml
